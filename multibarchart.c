@@ -58,7 +58,6 @@ int main(int argc, char *argv[]) {
   long int xpos, ypos;
 
   pixel_t blue = { 0, 0, 65535 };
-  pixel_t gray = { 32768, 32768, 32768 };
 
   pixel_t dark_red = { 32768, 0, 0 };
   
@@ -131,36 +130,22 @@ int main(int argc, char *argv[]) {
 
       for (;;) {
 
-	if (str == NULL) {
-	  break;
-	}
-
-	if (str[0] == '\r' || str[0] == '\n' || str[0] == 0) {
-	  break;
-	}
-
-	if (str[0] == ',') {
-	  str++;
-	}
-	
 	token = strtok(str, ",");
 
 	if (token == NULL) {
 	  break;
 	}
 
-	fprintf(stderr, "token %s\n", token);
-	
 	retval = sscanf(token, "%c:%ld", & (curpix.color_code), & (curpix.ycount));
 
-	fprintf(stderr, "%s: retval %d\n", __FUNCTION__, retval);
-	
 	if (retval != 2) {
 	  fprintf(stderr, "Error in data format.\n");
 	  fprintf(stderr, "token %s\n", token);
 	  return -1;
 	}
 
+	str = NULL;
+	
 	{
 	
 	  switch (curpix.color_code) {
