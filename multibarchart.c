@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  num_pixevents = 5;
+  num_pixevents = argc>1 ? strtol(argv[1],NULL,10) : 1000;
   
   pixevents = calloc(num_pixevents, sizeof(pixevent));
   if (pixevents == NULL) {
@@ -172,8 +172,6 @@ int main(int argc, char *argv[]) {
 	pixevents[pixeventno] = curpix;
 
 	pixeventno++;
-	
-	str = token + strlen(token) + 1;
 	
       }
 
